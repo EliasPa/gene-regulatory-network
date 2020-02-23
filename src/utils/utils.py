@@ -41,22 +41,5 @@ def simulate_many(S, M, lac_operon_hazards, c, T_max, P_NAMES, sim_type, sim_fun
         sim_type, system_name), legend=P_NAMES)
 
 
-"""
-Copied from Exercises to visualize data.
-"""
-
-
-def plot_result(T, X, title="", legend=("A (prey)", "B (Predator)")):
-    """Visualize a Lotka-Volterra simulation result. 
-
-    :param T: Time step vector
-    :param X: State vector
-    :return: Nothing.
-    """
-    plt.figure(figsize=(10, 6))
-    plt.plot(T, X)
-    plt.title(title)
-    plt.xlabel('Time')
-    plt.ylabel('Number of molecules')
-    plt.legend(legend, loc='upper right')
-    plt.show()
+def plot_result(T, X, title="", legend):
+    pass
