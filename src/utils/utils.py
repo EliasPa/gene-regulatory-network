@@ -2,6 +2,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 import time as t
 
+
 def bin_linear(T, X, bin_width, T_max):
 
     space = np.linspace(0, T_max, int(T_max / bin_width))
@@ -36,10 +37,21 @@ def simulate_many(S, M, lac_operon_hazards, c, T_max, P_NAMES, sim_type, sim_fun
         execution_times.append(t.time() - start_time)
 
     av = np.mean(averaged, axis=0)
-    print("Average execution time for {0} in {1} was {2}".format(sim_type, system_name, np.mean(execution_times)))
+    print("Average execution time for {0} in {1} was {2}".format(
+        sim_type, system_name, np.mean(execution_times)))
     plot_result(time, av, title="Averaged {0} {1}".format(
         sim_type, system_name), legend=P_NAMES)
 
 
-def plot_result(T, X, title="", legend):
-    pass
+def plot_result(T, X, title, legend):
+    plt.figure(figsize=(10, 6))
+
+    plt.plot(T, X[0, :])
+    plt.plot(T, X[1, :])
+    plt.plot(T, X[2, :])
+    plt.plot(T, X[3, :])
+    plt.plot(T, X[4, :])
+    plt.title(title)
+    plt.xlabel('Time')
+    plt.legend(legend, loc='upper right')
+    plt.show()
