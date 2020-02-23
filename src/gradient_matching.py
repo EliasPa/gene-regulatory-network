@@ -12,6 +12,7 @@ def gradient_matching(T, X):
     constants = np.ones(shape=(5, 19))
     H = np.concatenate((np.ones(shape=(1, 19)), X[:, 0:-1]))
     for n in range(5):
+        print("X and T: ", X[n,:].shape,T.shape)
         dxdt = np.diff(X[n, :]) / np.diff(T)
         H = np.concatenate((np.ones(shape=(1, 19)), X[:, 0:-1]))
         beta = np.linalg.solve(H @ H.T, H @ dxdt)
