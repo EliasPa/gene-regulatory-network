@@ -9,6 +9,7 @@ def gradient_matching(T, X):
     s = "%9s   %11s   %11s   %15s   %18s   %18s   %18s   %18s" % (
         "Component", "Basal level", "Degradation", "Regulation by SWI5", "Regulation by CBF1", "Regulation by GAL4", "Regulation by GAl80", "Regulation by ASH1")
     print(s)
+    print(X, X.shape)
     constants = np.ones(shape=(5, 19))
     H = np.concatenate((np.ones(shape=(1, 19)), X[:, 0:-1]))
     for n in range(5):
