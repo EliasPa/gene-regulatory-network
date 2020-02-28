@@ -77,6 +77,8 @@ def gradient_matching_model_3(T, X):
     # ASH1: SWI5, CBF1, GAL4, GAL80
     indices_ASH1 = [2, 3]
 
+    threshold = 0.06
+    
     interaction_indices = [indices_SWI5, indices_CBF1,
                            indices_GAL4, indices_GAL80, indices_ASH1]
     for n in range(5):
@@ -91,4 +93,7 @@ def gradient_matching_model_3(T, X):
         for i, b in enumerate(beta[1:]):
             print("Effect of {}: {}".format(
                 names[interaction_indices[n][i]], b))
+            if abs(b) >= threshold:
+              print("Effect of {}: {}".format(
+                  names[interaction_indices[n][i]], b))
         print("––––––––––––––––––––––––––––––––––––")
