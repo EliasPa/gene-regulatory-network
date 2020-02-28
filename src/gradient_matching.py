@@ -20,7 +20,6 @@ def gradient_matching(T, X):
         H = return_design_matrix(X[:, 0:-1])
         beta = np.linalg.solve(H @ H.T, H @ dxdt)
         regs = np.copy(beta[1:6])
-        print(names[n], beta)
         regs[n] = 0
         s = "{:^9s}   {:10.2f}     {:10.2f}    {:10.2f}            {:^10.2f}         {:^10.2f}           {:^10.2f}       {:^10.2f}".format(
             names[n], beta[0], -beta[n+1], regs[0], regs[1], regs[2], regs[3], regs[4])
