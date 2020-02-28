@@ -1,6 +1,6 @@
 import numpy as np
 from matplotlib import pyplot as plt
-
+from utils.utils import get_interaction_indices
 
 def return_design_matrix(X):
     H = np.concatenate((np.ones(shape=(1, 19)), X))
@@ -8,8 +8,6 @@ def return_design_matrix(X):
 
 
 # Copied from the exercise 5
-
-
 def gradient_matching(T, X):
     names = ["SWI5", "CBF1", "GAL4", "GAL80", "ASH1"]
 
@@ -17,6 +15,7 @@ def gradient_matching(T, X):
         "Component", "Basal level", "Degradation", "Regulation by SWI5", "Regulation by CBF1", "Regulation by GAL4", "Regulation by GAl80", "Regulation by ASH1")
     print(s)
     for n in range(5):
+        print("X and T: ", X[n,:].shape,T.shape)
         dxdt = np.diff(X[n, :]) / np.diff(T)
         H = return_design_matrix(X[:, 0:-1])
         beta = np.linalg.solve(H @ H.T, H @ dxdt)
@@ -31,22 +30,10 @@ def gradient_matching(T, X):
 
 def gradient_matching_model_2(T, X):
     names = ["SWI5", "CBF1", "GAL4", "GAL80", "ASH1"]
-    # Interacting genes
-    # SWI5: CBF1, GAL4, GAL80, ASH1
-    indices_SWI5 = [1, 2, 3, 4]
-    # SBF1: SWI5, GAL4, GAL80, ASH1
-    indices_CBF1 = [0, 2, 3, 4]
-    # GAL4: GAL80
-    indices_GAL4 = [3]
-    # GAL80: GAL4, ASH1
-    indices_GAL80 = [2, 4]
-    # ASH1: SWI5, CBF1, GAL4, GAL80
-    indices_ASH1 = [0, 1, 2, 3]
 
     threshold = 0.06
 
-    interaction_indices = [indices_SWI5, indices_CBF1,
-                           indices_GAL4, indices_GAL80, indices_ASH1]
+    interaction_indices = get_interaction_indices(1)
     for n in range(5):
         dxdt = np.diff(X[n, :]) / np.diff(T)
         H = return_design_matrix(np.take(
@@ -65,22 +52,10 @@ def gradient_matching_model_2(T, X):
 
 def gradient_matching_model_3(T, X):
     names = ["SWI5", "CBF1", "GAL4", "GAL80", "ASH1"]
-    # Interacting genes
-    # SWI5: GAL4, GAL80
-    indices_SWI5 = [2, 3]
-    # SBF1: SWI5, GAL4, GAL80, ASH1
-    indices_CBF1 = [0, 3]
-    # GAL4: GAL80
-    indices_GAL4 = [3]
-    # GAL80: GAL4, ASH1
-    indices_GAL80 = [2, 4]
-    # ASH1: SWI5, CBF1, GAL4, GAL80
-    indices_ASH1 = [2, 3]
-
+    
     threshold = 0.06
     
-    interaction_indices = [indices_SWI5, indices_CBF1,
-                           indices_GAL4, indices_GAL80, indices_ASH1]
+    interaction_indices = get_interaction_indices(2)
     for n in range(5):
         dxdt = np.diff(X[n, :]) / np.diff(T)
         H = return_design_matrix(np.take(

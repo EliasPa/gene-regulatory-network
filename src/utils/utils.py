@@ -55,3 +55,41 @@ def plot_result(T, X, title, legend):
     plt.xlabel('Time')
     plt.legend(legend, loc='upper right')
     plt.show()
+
+def get_interaction_indices(model):
+
+  if model == 0:
+    # Full model
+    # Interacting genes:
+    #   ALL
+    return [range(0,5), range(0,5), range(0,5), range(0,5), range(0,5)]
+  elif model == 1:
+    # First reduced model
+    # Interacting genes
+    # SWI5: CBF1, GAL4, GAL80, ASH1
+    indices_SWI5 = [1, 2, 3, 4]
+    # SBF1: SWI5, GAL4, GAL80, ASH1
+    indices_CBF1 = [0, 2, 3, 4]
+    # GAL4: GAL80
+    indices_GAL4 = [3]
+    # GAL80: GAL4, ASH1
+    indices_GAL80 = [2, 4]
+    # ASH1: SWI5, CBF1, GAL4, GAL80
+    indices_ASH1 = [0, 1, 2, 3]
+
+    return [indices_SWI5, indices_CBF1, indices_GAL4, indices_GAL80, indices_ASH1]
+  else:
+    # Max down- and upregulating genes model
+    # Interacting genes
+    # SWI5: GAL4, GAL80
+    indices_SWI5 = [2, 3]
+    # SBF1: SWI5, GAL4, GAL80, ASH1
+    indices_CBF1 = [0, 3]
+    # GAL4: GAL80
+    indices_GAL4 = [3]
+    # GAL80: GAL4, ASH1
+    indices_GAL80 = [2, 4]
+    # ASH1: SWI5, CBF1, GAL4, GAL80
+    indices_ASH1 = [2, 3]
+
+    return [indices_SWI5, indices_CBF1, indices_GAL4, indices_GAL80, indices_ASH1]
