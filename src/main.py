@@ -4,6 +4,7 @@ from data import data
 from utils.utils import plot_result
 from gradient_matching import gradient_matching
 from gradient_matching import gradient_matching_model_2
+from gradient_matching import gradient_matching_model_3
 
 
 def main():
@@ -16,6 +17,9 @@ def main():
 
     # Reduced model
     gradient_matching_model_2(t_data, gene_data)
+
+    # Model with highest up-down regulating coefficient
+    gradient_matching_model_3(t_data, gene_data)
 
 
 main()
