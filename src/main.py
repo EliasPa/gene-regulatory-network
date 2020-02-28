@@ -10,7 +10,7 @@ def main():
     gene_data = data.gene_data
     t_data = data.t_data
     data_legend = ["SWI5", "CBF1", "GAL4", "GAL80", "ASH1"]
-    # plot_result(t_data, gene_data, "Gene network", data_legend)
+    #plot_result(t_data, gene_data, "Gene network", data_legend)
     # Full model
     gradient_matching(t_data, gene_data)
 

@@ -3,7 +3,8 @@ from matplotlib import pyplot as plt
 
 
 def return_design_matrix(X):
-    return np.concatenate((np.ones(shape=(1, 19)), X))
+    H = np.concatenate((np.ones(shape=(1, 19)), X))
+    return H
 
 
 # Copied from the exercise 5
@@ -24,6 +25,7 @@ def gradient_matching(T, X):
         s = "{:^9s}   {:10.2f}     {:10.2f}    {:10.2f}            {:^10.2f}         {:^10.2f}           {:^10.2f}       {:^10.2f}".format(
             names[n], beta[0], -beta[n+1], regs[0], regs[1], regs[2], regs[3], regs[4])
         print(s)
+
     print("––––––––––––––––––––––––––––––––––––")
 
 
@@ -41,6 +43,8 @@ def gradient_matching_model_2(T, X):
     # ASH1: SWI5, CBF1, GAL4, GAL80
     indices_ASH1 = [0, 1, 2, 3]
 
+    threshold = 0.06
+
     interaction_indices = [indices_SWI5, indices_CBF1,
                            indices_GAL4, indices_GAL80, indices_ASH1]
     for n in range(5):
@@ -53,6 +57,7 @@ def gradient_matching_model_2(T, X):
         print("––––––––––––––––––––––––––––––––––––")
         print("Bias", beta[0])
         for i, b in enumerate(beta[1:]):
-            print("Effect of {}: {}".format(
-                names[interaction_indices[n][i]], b))
+            if abs(b) >= threshold:
+              print("Effect of {}: {}".format(
+                  names[interaction_indices[n][i]], b))
         print("––––––––––––––––––––––––––––––––––––")
